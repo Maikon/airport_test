@@ -7,7 +7,7 @@ let(:plane) { Plane.new }
   context "airport capacity" do
 
     it "should have a default capacity" do
-      expect(airport.capacity).to eq(15)
+      expect(airport.capacity).to eq(10)
     end
 
     it "have a capacity of 6" do
@@ -27,6 +27,13 @@ let(:plane) { Plane.new }
       airport.land(plane)
       airport.take_off(plane)
       expect(airport.planes).to eq([])
+    end
+  end
+
+  context "traffi control" do
+    it "plane cannot land if airport is full" do
+      10.times { airport.land(plane) }
+      expect(airport.land(plane)).to raise_error
     end
   end
 
