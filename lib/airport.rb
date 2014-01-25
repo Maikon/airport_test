@@ -1,9 +1,18 @@
 class Airport
-  attr_accessor :capacity
-  DEFAULT_CAPACITY = 10
+  attr_reader :planes, :capacity
+  DEFAULT_CAPACITY = 15
 
   def initialize(options = {})
-    self.capacity = options.fetch(:capacity, DEFAULT_CAPACITY)
+    @capacity = options.fetch(:capacity, DEFAULT_CAPACITY)
+    @planes = []
+  end
+
+  def land(plane)
+    planes << plane
+  end
+
+  def take_off(plane)
+    planes.delete(plane)
   end
 
 end
