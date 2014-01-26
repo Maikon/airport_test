@@ -32,11 +32,14 @@ let(:plane) { Plane.new }
 
   context "traffic control" do
     it "plane cannot land if airport is full" do
-      10.times { airport.land(plane) }
-      expect { airport.land(plane) }.to raise_error
+      expect { 11.times {airport.land(plane)} }.to raise_error
     end
   end
 
+  # context "weather conditions" do
 
-
+  #   it "plane cannot land if weather is stormy" do
+  #     airport.land(plane)
+  #   end
+  # end
 end
