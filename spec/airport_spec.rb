@@ -10,7 +10,7 @@ let(:plane) { Plane.new }
       expect(airport.capacity).to eq(10)
     end
 
-    it "have a capacity of 6" do
+    it "should have a capacity of 6" do
       airport = Airport.new(capacity: 6)
       expect(airport.capacity).to eq(6)
     end
@@ -36,10 +36,11 @@ let(:plane) { Plane.new }
     end
   end
 
-  # context "weather conditions" do
+  context "weather conditions" do
 
-  #   it "plane cannot land if weather is stormy" do
-  #     airport.land(plane)
-  #   end
-  # end
+    it "plane cannot land if weather is stormy" do
+      airport.stub(:stormy_weather?) { true }
+      expect(airport.land(plane)).to raise_error
+    end
+  end
 end
