@@ -9,6 +9,8 @@ class Airport
 
   def land(plane)
     raise "Airport is full I'm afraid!" if full?
+    # You have two tests failing because stormy_weather? doesn't exist
+    # Where is it supposed to be defined?g
     raise "Stormy and dangerous weather, cannot land now." if stormy_weather?
     planes << plane
   end
