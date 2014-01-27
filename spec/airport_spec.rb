@@ -16,7 +16,10 @@ let(:plane) { Plane.new }
     end
   end
 
-  context "landing and taking off" do
+  context "good weather conditions" do
+    before do
+      Airport.any_instance.stub(:stormy_weather?).and_return(false)
+    end
 
     it "plane can land" do
       airport.land(plane)
@@ -36,11 +39,13 @@ let(:plane) { Plane.new }
     end
   end
 
-  context "weather conditions" do
+  context "bad weather conditions" do
+    before do
+      Airport.any_instance.stub(:stormy_weather?).and_return(true)
+    end
 
     it "plane cannot land if weather is stormy" do
-      airport.stub(:stormy_weather?) { true }
-      expect(airport.land(plane)).to raise_error
+      expect { airport.land(plane) }.to raise_error
     end
   end
 end
