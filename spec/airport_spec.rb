@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Airport' do
+describe Airport do
   let(:airport) { Airport.new }
   let(:plane) { double :plane, land: false, take_off: true }
 
