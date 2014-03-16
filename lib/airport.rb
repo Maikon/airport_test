@@ -1,24 +1,29 @@
-class Airport
-  attr_reader :planes, :capacity
-  DEFAULT_CAPACITY = 10
+require_relative 'weather'
 
-  def initialize(options = {})
-    @capacity = options.fetch(:capacity, DEFAULT_CAPACITY)
+class Airport
+  include Weather
+  attr_reader :capacity
+  attr_accessor :planes
+
+  def initialize(capacity = 6)
+    @capacity = capacity
     @planes = []
   end
 
-  def land(plane)
-    raise "Airport is full I'm afraid!" if full?
-    raise "Stormy and dangerous weather, cannot land now." if stormy_weather?
-    planes << plane
+  def parks(plane)
+    raise 'Aiport is full!' if full?
+    raise 'Stormy weather, cannot allow landing.' if weather_stormy?
+    @planes << plane
+    plane.land
   end
 
-  def take_off(plane)
-    planes.delete(plane)
+  def release(plane)
+    raise 'Stormy weather, not advisable to fly.' if weather_stormy?
+    @planes.delete(plane)
+    plane.take_off
   end
 
   def full?
-    planes.count >= capacity
+    @planes.length == @capacity
   end
-
 end
