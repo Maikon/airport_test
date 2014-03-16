@@ -18,7 +18,6 @@ describe Airport do
       airport = Airport.new(10)
       expect(airport.capacity).to eq(10)
     end
-
   end
 
   context 'airport control' do
